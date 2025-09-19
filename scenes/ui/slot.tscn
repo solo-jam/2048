@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://yysuwlenskbj"]
+
+[ext_resource type="Script" uid="uid://dapsh7a3fheug" path="res://scenes/ui/slot.gd" id="1_jkamp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y7ywj"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_size = 8
+shadow_offset = Vector2(8, 4)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jkamp"]
+font_size = 32
+outline_size = 4
+outline_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.48235294)
+shadow_offset = Vector2(4, 2)
+
+[node name="Slot" type="PanelContainer"]
+custom_minimum_size = Vector2(128, 128)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_y7ywj")
+script = ExtResource("1_jkamp")
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 2
+text = "0"
+label_settings = SubResource("LabelSettings_jkamp")
+horizontal_alignment = 1
+vertical_alignment = 1

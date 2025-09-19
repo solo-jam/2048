@@ -1,0 +1,160 @@
+[gd_scene load_steps=6 format=3 uid="uid://kr6jpiqs7y7d"]
+
+[ext_resource type="PackedScene" uid="uid://yysuwlenskbj" path="res://scenes/ui/slot.tscn" id="1_fgbdc"]
+[ext_resource type="Script" uid="uid://cwf58dc7qynju" path="res://scenes/core/slot_grid_container.gd" id="1_i4cec"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rktp"]
+bg_color = Color(0.6649832, 0.59014493, 0.45056063, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6rktp"]
+font_size = 48
+outline_size = 4
+outline_color = Color(0.0056611504, 0.0056611514, 0.00566115, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.5176471)
+shadow_offset = Vector2(4, 2)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fgbdc"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+
+[node name="Main" type="Node2D"]
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="PanelContainer" type="PanelContainer" parent="UI"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_6rktp")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Score_Label" type="Label" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "游戏分数:"
+label_settings = SubResource("LabelSettings_6rktp")
+
+[node name="PanelContainer" type="PanelContainer" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(700, 700)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fgbdc")
+
+[node name="MarginContainer" type="MarginContainer" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_top = 48
+theme_override_constants/margin_right = 48
+theme_override_constants/margin_bottom = 48
+
+[node name="SlotGridContainer" type="GridContainer" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 32
+theme_override_constants/v_separation = 32
+columns = 4
+script = ExtResource("1_i4cec")
+
+[node name="Slot" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot2" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot3" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot4" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot5" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot6" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot7" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot8" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot9" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot10" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot11" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot12" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot13" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot14" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot15" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="Slot16" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
+layout_mode = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Button" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+text = "关闭"
+
+[node name="Button2" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "重新
+开始"
+
+[node name="Button3" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "撤回
+一步"
+
+[node name="Button4" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(88, 88)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 32
+text = "静音"
+
+[node name="UI_EX" type="CanvasLayer" parent="."]
+layer = 2
