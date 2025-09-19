@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://kr6jpiqs7y7d"]
+[gd_scene load_steps=7 format=3 uid="uid://kr6jpiqs7y7d"]
 
 [ext_resource type="PackedScene" uid="uid://yysuwlenskbj" path="res://scenes/ui/slot.tscn" id="1_fgbdc"]
 [ext_resource type="Script" uid="uid://cwf58dc7qynju" path="res://scenes/core/slot_grid_container.gd" id="1_i4cec"]
+[ext_resource type="Script" uid="uid://digb5oscbr5v6" path="res://scenes/core/main_button_group.gd" id="3_2dmjg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rktp"]
 bg_color = Color(0.6649832, 0.59014493, 0.45056063, 1)
@@ -118,11 +119,12 @@ layout_mode = 2
 [node name="Slot16" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
+[node name="MainButtonGroup" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 32
+script = ExtResource("3_2dmjg")
 
-[node name="Button" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="Button" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -130,7 +132,7 @@ size_flags_vertical = 8
 theme_override_font_sizes/font_size = 32
 text = "关闭"
 
-[node name="Button2" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="RestartButton" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -139,7 +141,7 @@ theme_override_font_sizes/font_size = 32
 text = "重新
 开始"
 
-[node name="Button3" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="Button3" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -148,7 +150,7 @@ theme_override_font_sizes/font_size = 32
 text = "撤回
 一步"
 
-[node name="Button4" type="Button" parent="UI/PanelContainer/MarginContainer/VBoxContainer2"]
+[node name="Button4" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
 custom_minimum_size = Vector2(88, 88)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -158,3 +160,5 @@ text = "静音"
 
 [node name="UI_EX" type="CanvasLayer" parent="."]
 layer = 2
+
+[connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/RestartButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_restart_button_pressed"]
