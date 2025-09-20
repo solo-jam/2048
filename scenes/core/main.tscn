@@ -1,8 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://kr6jpiqs7y7d"]
+[gd_scene load_steps=12 format=3 uid="uid://kr6jpiqs7y7d"]
 
 [ext_resource type="PackedScene" uid="uid://yysuwlenskbj" path="res://scenes/ui/slot.tscn" id="1_fgbdc"]
 [ext_resource type="Script" uid="uid://cwf58dc7qynju" path="res://scenes/core/slot_grid_container.gd" id="1_i4cec"]
 [ext_resource type="Script" uid="uid://digb5oscbr5v6" path="res://scenes/core/main_button_group.gd" id="3_2dmjg"]
+[ext_resource type="PackedScene" uid="uid://b6b3rska3xjo1" path="res://scenes/ui/icon_button.tscn" id="4_ebys2"]
+[ext_resource type="Texture2D" uid="uid://dnsjcohsgakmg" path="res://assets/icon/cross.svg" id="5_jvmw0"]
+[ext_resource type="Texture2D" uid="uid://dlsa1tn3m1cgg" path="res://assets/icon/redo2.svg" id="6_phv0v"]
+[ext_resource type="Texture2D" uid="uid://dl2bw72xnwju8" path="res://assets/icon/undo2.svg" id="7_jpx65"]
+[ext_resource type="Texture2D" uid="uid://bcl3j5s10mr6s" path="res://assets/icon/volume-medium.svg" id="8_fu2j5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rktp"]
 bg_color = Color(0.6649832, 0.59014493, 0.45056063, 1)
@@ -43,7 +48,8 @@ theme_override_constants/margin_bottom = 64
 
 [node name="VBoxContainer" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
 [node name="Score_Label" type="Label" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -121,44 +127,38 @@ layout_mode = 2
 
 [node name="MainButtonGroup" type="VBoxContainer" parent="UI/PanelContainer/MarginContainer"]
 layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
 theme_override_constants/separation = 32
 script = ExtResource("3_2dmjg")
 
-[node name="Button" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
-custom_minimum_size = Vector2(88, 88)
+[node name="CloseButton" parent="UI/PanelContainer/MarginContainer/MainButtonGroup" instance=ExtResource("4_ebys2")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
+icon = ExtResource("5_jvmw0")
 text = "关闭"
 
-[node name="RestartButton" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
-custom_minimum_size = Vector2(88, 88)
+[node name="RestartButton" parent="UI/PanelContainer/MarginContainer/MainButtonGroup" instance=ExtResource("4_ebys2")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+icon = ExtResource("6_phv0v")
 text = "重新
-开始"
+游戏"
 
-[node name="Button3" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
-custom_minimum_size = Vector2(88, 88)
+[node name="UndoButton" parent="UI/PanelContainer/MarginContainer/MainButtonGroup" instance=ExtResource("4_ebys2")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
+icon = ExtResource("7_jpx65")
 text = "撤回
 一步"
 
-[node name="Button4" type="Button" parent="UI/PanelContainer/MarginContainer/MainButtonGroup"]
-custom_minimum_size = Vector2(88, 88)
+[node name="MutoButton" parent="UI/PanelContainer/MarginContainer/MainButtonGroup" instance=ExtResource("4_ebys2")]
 layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 4
-theme_override_font_sizes/font_size = 32
-text = "静音"
+icon = ExtResource("8_fu2j5")
+text = "声音
+开"
 
 [node name="UI_EX" type="CanvasLayer" parent="."]
 layer = 2
 
+[connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/CloseButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_close_button_pressed"]
 [connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/RestartButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/UndoButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_undo_button_pressed"]
+[connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/MutoButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_muto_button_pressed"]

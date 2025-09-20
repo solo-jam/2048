@@ -21,11 +21,16 @@ var remaining_slots : Array = range(16)
 #endregion
 
 # TODO nme ================================ 虚方法<===========================
-#region 常用的虚方法
- 
+#region 常用的虚方法 
 func _ready() -> void:
 	for i  in 2 : create_slot_score(2)
 	update_game_score()
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("left"): move_rows()
+	if event.is_action_pressed("right"): move_rows(true)
+	if event.is_action_pressed("up"): move_cols()
+	if event.is_action_pressed("down"): move_cols(true)
 
 #endregion    
 
@@ -36,17 +41,105 @@ func _ready() -> void:
 
 # TODO 网络格子容器 ==========================> 工具方法=====================
 #region 工具方法
+# Func 横向移动
+func move_rows(reverse_flag : bool = false) -> void:
+	move(rows, reverse_flag)
+	merge_slots(rows, reverse_flag)
+	update_slots_in_rows()
+	update_remaining_slots()
+	create_slot_score()
+	update_game_score()
+# Func 纵向移动
+func move_cols(reverse_flag : bool = false) -> void:
+	move(cols, reverse_flag)
+	merge_slots(cols, reverse_flag)
+	update_slots_in_cols()
+	update_remaining_slots()
+	create_slot_score()
+	update_game_score()
+# Func 能否移动
+func can_move(arrs : Array, reverse_flag : bool = false) -> bool:
+	if reverse_flag:
+		for arr in arrs.size():
+			var non_zero : int = -1
+			for i in range(arrs[arr].size()-1, -1, -1):
+				if arrs[arr][i] == 0 : continue
+				if arrs[arr][i] == non_zero : return true
+				if i + 1 < arrs[arr].size() and arrs[arr][i + 1] == 0 : return true
+				non_zero = arrs[arr][i]
+	else:
+		for arr in arrs.size():
+			var non_zero : int = -1
+			for i in arrs[arr].size():
+				if arrs[arr][i] == 0 : continue
+				if arrs[arr][i] == non_zero : return true
+				if i - 1 >= 0 and arrs[arr][i - 1] == 0 : return true
+				non_zero = arrs[arr][i]
+	return false
+# Func 移动格子
+func move(arrs : Array, reverse_flag : bool = false) -> void:
+	if reverse_flag :
+		for arr in arrs.size():
+			var right : int = arrs[arr].size() - 1
+			for left in range(arrs[arr].size() -1, -1, -1):
+				if arrs[arr][left] == 0 : continue
+				var temp_slot : int = arrs[arr][left]
+				arrs[arr][left] = arrs[arr][right]
+				arrs[arr][right] = temp_slot
+				right -= 1
+		return
+	for arr in arrs.size():
+		var left : int = 0 
+		for right in arrs[arr].size():
+			if arrs[arr][right] == 0 : continue
+			var temp_slot : int = arrs[arr][right]
+			arrs[arr][right] = arrs[arr][left]
+			arrs[arr][left] = temp_slot
+			left += 1
+# Func 合并格子
+func merge_slots(arrs : Array, reverse_flag : bool = false) -> void:
+	for arr in arrs.size():
+		var arr_size =  arrs[arr].size()
+		if reverse_flag :
+			for i in range(arr_size - 1, 0, -1):
+				if arrs[arr][i] == arrs[arr][i - 1] and arrs[arr][i] != 0:
+					arrs[arr][i]  *= 2
+					arrs[arr][i - 1] = 0
+			continue
+		for i in arr_size - 1:
+			if arrs[arr][i] == arrs[arr][i + 1] and arrs[arr][i] != 0:
+				arrs[arr][i] *= 2
+				arrs[arr][i + 1] = 0
+			
 # Func 重新开始游戏
 func restart_game() -> void:
 	slots =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 	remaining_slots = range(16) 
 	for i  in 2 : create_slot_score(2)
 	update_game_score()
+# Func 更新空位
+func update_remaining_slots() -> void:
+	remaining_slots = []
+	for i in slots.size():
+		if slots[i] == 0:
+			remaining_slots.append(i)
 # Func 更新游戏分数
 func update_game_score() -> void:
 	var game_score : int = 0
 	for i in slots : game_score += i
 	score_label.text = "游戏分数：%s" % game_score
+	if not can_move(rows) and not can_move(rows, true) and not can_move(cols) and not can_move(cols, true) :
+		print("游戏结束")
+# Func 根究rows更新slots
+func update_slots_in_rows() -> void:
+	for r in rows.size():
+		for i in rows[r].size():
+			slots[r * 4 + i] = rows[r][i]
+# Func 根据cols更新slots
+func update_slots_in_cols() -> void:
+	for c in cols.size():
+		for i in cols[c].size():
+			slots[i * 4 + c] = cols[c][i]
 # Func 根据slots更新rows
 func update_rows() -> void:
 	for i in slots.size(): rows[i / 4][i % 4] = slots[i]
