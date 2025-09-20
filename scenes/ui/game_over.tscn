@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://py2q3ef087vw"]
+
+[ext_resource type="PackedScene" uid="uid://b6b3rska3xjo1" path="res://scenes/ui/icon_button.tscn" id="1_fu4wh"]
+[ext_resource type="Script" uid="uid://cfht40sf34a4w" path="res://scenes/ui/game_over.gd" id="1_x6o8e"]
+[ext_resource type="Texture2D" uid="uid://dlsa1tn3m1cgg" path="res://assets/icon/redo2.svg" id="2_x6o8e"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfrx6"]
+bg_color = Color(0.6649832, 0.59014493, 0.45056063, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.003519166, 0.0035191693, 0.0035191625, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+shadow_size = 4
+shadow_offset = Vector2(4, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_fu4wh"]
+font_size = 64
+outline_size = 2
+outline_color = Color(0.0018410678, 0.0018410682, 0.0018410678, 1)
+shadow_size = 4
+shadow_color = Color(0.003921569, 0.003921569, 0.003921569, 0.48235294)
+shadow_offset = Vector2(4, 2)
+
+[sub_resource type="LabelSettings" id="LabelSettings_x6o8e"]
+font_size = 32
+outline_size = 2
+outline_color = Color(0.0018410678, 0.0018410682, 0.0018410678, 1)
+shadow_size = 4
+shadow_color = Color(0, 0, 0, 0.48235294)
+shadow_offset = Vector2(4, 2)
+
+[node name="GameOver" type="PanelContainer"]
+custom_minimum_size = Vector2(700, 400)
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_vfrx6")
+script = ExtResource("1_x6o8e")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 2
+
+[node name="RestartButton" parent="MarginContainer/GridContainer" instance=ExtResource("1_fu4wh")]
+layout_mode = 2
+icon = ExtResource("2_x6o8e")
+text = "重新
+游戏"
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+text = "游戏结束"
+label_settings = SubResource("LabelSettings_fu4wh")
+
+[node name="Control" type="Control" parent="MarginContainer/GridContainer"]
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "游戏分数:"
+label_settings = SubResource("LabelSettings_x6o8e")
+vertical_alignment = 1
+
+[connection signal="pressed" from="MarginContainer/GridContainer/RestartButton" to="." method="_on_restart_button_pressed"]

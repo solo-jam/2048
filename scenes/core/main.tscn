@@ -29,6 +29,15 @@ corner_radius_bottom_left = 64
 
 [node name="Main" type="Node2D"]
 
+[node name="BGM" type="Node" parent="."]
+unique_name_in_owner = true
+
+[node name="BGMAudioStreamPlayer" type="AudioStreamPlayer2D" parent="BGM"]
+unique_name_in_owner = true
+
+[node name="SFX" type="Node" parent="."]
+unique_name_in_owner = true
+
 [node name="UI" type="CanvasLayer" parent="."]
 
 [node name="PanelContainer" type="PanelContainer" parent="UI"]
@@ -52,6 +61,7 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 
 [node name="Score_Label" type="Label" parent="UI/PanelContainer/MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "游戏分数:"
 label_settings = SubResource("LabelSettings_6rktp")
@@ -69,6 +79,7 @@ theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
 [node name="SlotGridContainer" type="GridContainer" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -76,6 +87,7 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 4
 script = ExtResource("1_i4cec")
+sfxs = Array[AudioStreamWAV]([null])
 
 [node name="Slot" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
 layout_mode = 2
@@ -149,16 +161,18 @@ icon = ExtResource("7_jpx65")
 text = "撤回
 一步"
 
-[node name="MutoButton" parent="UI/PanelContainer/MarginContainer/MainButtonGroup" instance=ExtResource("4_ebys2")]
+[node name="MuteButton" parent="UI/PanelContainer/MarginContainer/MainButtonGroup" instance=ExtResource("4_ebys2")]
+unique_name_in_owner = true
 layout_mode = 2
 icon = ExtResource("8_fu2j5")
 text = "声音
 开"
 
 [node name="UI_EX" type="CanvasLayer" parent="."]
+unique_name_in_owner = true
 layer = 2
 
 [connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/CloseButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_close_button_pressed"]
 [connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/RestartButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_restart_button_pressed"]
 [connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/UndoButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_undo_button_pressed"]
-[connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/MutoButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_muto_button_pressed"]
+[connection signal="pressed" from="UI/PanelContainer/MarginContainer/MainButtonGroup/MuteButton" to="UI/PanelContainer/MarginContainer/MainButtonGroup" method="_on_mute_button_pressed"]

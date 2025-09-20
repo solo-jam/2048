@@ -15,12 +15,25 @@ run/main_scene="uid://kr6jpiqs7y7d"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signal_Debugger="*res://addons/SignalVisualizer/Debugger/SignalDebugger.gd"
+
 [display]
 
 window/size/viewport_width=1024
 window/size/viewport_height=768
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
+
+[editor]
+
+version_control/plugin_name="GitPlugin"
+version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg", "res://addons/Todo_Manager/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg", "res://addons/theme_gen_save_sync/plugin.cfg")
 
 [input]
 

@@ -1,5 +1,6 @@
 class_name SlotGridContianer extends GridContainer
-
+const GAME_OVER = preload("uid://py2q3ef087vw")
+const POP_LABEL = preload("uid://cmkej24xwsni1")
 # TODO 网络格子容器 ===================>值 号<========================>
 #region 信号
 
@@ -12,12 +13,20 @@ class_name SlotGridContianer extends GridContainer
 
 # TODO 网络格子容器 ===================>变 量<========================>
 #region 变量
-@onready var score_label: Label = $"../../../Score_Label"
+@onready var bgm: Node = %BGM
+@onready var sfx: Node = %SFX
+@onready var score_label: Label = %Score_Label
+@onready var ui_ex: CanvasLayer = %UI_EX
+@onready var bgm_audio_stream_player: AudioStreamPlayer2D = %BGMAudioStreamPlayer
+
+@export var sfxs : Array[AudioStreamWAV]
+@export var bgms : Array[AudioStreamWAV]
 
 var slots : Array =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 var rows : Array[Array] =[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 var cols : Array[Array] =[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]]
 var remaining_slots : Array = range(16) 
+var last_slots : Array = []
 #endregion
 
 # TODO nme ================================ 虚方法<===========================
@@ -25,6 +34,7 @@ var remaining_slots : Array = range(16)
 func _ready() -> void:
 	for i  in 2 : create_slot_score(2)
 	update_game_score()
+	bgm_play()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left"): move_rows()
@@ -41,18 +51,57 @@ func _input(event: InputEvent) -> void:
 
 # TODO 网络格子容器 ==========================> 工具方法=====================
 #region 工具方法
+# Func 音乐播放
+func bgm_play() -> void:
+	bgm_audio_stream_player.stream = bgms[randi() % bgms.size()]
+	bgm_audio_stream_player.play()
+# Func 音效开关
+func sfx_play() -> void:
+	var audio_player : AudioStreamPlayer2D = AudioStreamPlayer2D.new()
+	audio_player.stream = sfxs[randi() % sfxs.size()]
+	audio_player.finished.connect(func(): audio_player.queue_free())
+	sfx.add_child(audio_player)
+# Func 插件PopLabel
+func create_pop_label(popStr : String) -> void:
+	var popLabel : PopLabel = POP_LABEL.instantiate()
+	popLabel.text = popStr
+	ui_ex.add_child(popLabel)
+# Func 记录移动前格子
+func save_last_slots() -> void:
+	last_slots = []
+	for i in slots : last_slots.append(i)
+# Func 撤回移动
+func undo_slots_move() -> void:
+	if last_slots.size() == 0 : 
+		create_pop_label("当前无法撤回")
+		return
+	slots = last_slots
+	update_slots_score()
+	update_remaining_slots()
+	update_game_score()
+	last_slots = []
 # Func 横向移动
 func move_rows(reverse_flag : bool = false) -> void:
+	if not can_move(rows, reverse_flag) : 
+		create_pop_label("当前方向无法移动")
+		return
+	save_last_slots()
 	move(rows, reverse_flag)
 	merge_slots(rows, reverse_flag)
+	move(rows, reverse_flag)
 	update_slots_in_rows()
 	update_remaining_slots()
 	create_slot_score()
 	update_game_score()
 # Func 纵向移动
 func move_cols(reverse_flag : bool = false) -> void:
+	if not can_move(cols, reverse_flag) : 
+		create_pop_label("当前方向无法移动")
+		return
+	save_last_slots()
 	move(cols, reverse_flag)
 	merge_slots(cols, reverse_flag)
+	move(cols, reverse_flag)
 	update_slots_in_cols()
 	update_remaining_slots()
 	create_slot_score()
@@ -129,7 +178,10 @@ func update_game_score() -> void:
 	for i in slots : game_score += i
 	score_label.text = "游戏分数：%s" % game_score
 	if not can_move(rows) and not can_move(rows, true) and not can_move(cols) and not can_move(cols, true) :
-		print("游戏结束")
+		var game_over = GAME_OVER.instantiate()
+		ui_ex.add_child(game_over)
+		game_over.score = game_score
+		game_over.game_over.connect(restart_game)
 # Func 根究rows更新slots
 func update_slots_in_rows() -> void:
 	for r in rows.size():
@@ -154,7 +206,6 @@ func update_slots_score() -> void:
 	
 	update_cols()
 	update_rows()
-
 # Func 给格子加分数
 func create_slot_score(_score : int = -1) -> void:
 	var score : int = _score
