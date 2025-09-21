@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://py2q3ef087vw"]
 
 [ext_resource type="PackedScene" uid="uid://b6b3rska3xjo1" path="res://scenes/ui/icon_button.tscn" id="1_fu4wh"]
-[ext_resource type="Script" uid="uid://cfht40sf34a4w" path="res://scenes/ui/game_over.gd" id="1_x6o8e"]
+[ext_resource type="Script" path="res://scenes/ui/game_over.gd" id="1_x6o8e"]
 [ext_resource type="Texture2D" uid="uid://dlsa1tn3m1cgg" path="res://assets/icon/redo2.svg" id="2_x6o8e"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vfrx6"]
@@ -36,8 +36,17 @@ shadow_offset = Vector2(4, 2)
 
 [node name="GameOver" type="PanelContainer"]
 custom_minimum_size = Vector2(700, 400)
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -350.0
+offset_top = -200.0
+offset_right = 350.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vfrx6")
 script = ExtResource("1_x6o8e")
 

@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cmkej24xwsni1"]
+[gd_scene load_steps=3 format=3 uid="uid://iaoyrvbjqse4"]
 
-[ext_resource type="Script" uid="uid://x1wplv6rcy3d" path="res://scenes/ui/pop_label.gd" id="1_aougp"]
+[ext_resource type="Script" path="res://scenes/ui/pop_label.gd" id="1_aougp"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_jelmi"]
 font_size = 24
@@ -11,8 +11,18 @@ shadow_color = Color(0, 0, 0, 0.48235294)
 shadow_offset = Vector2(4, 2)
 
 [node name="PopLabel" type="Label"]
-offset_right = 40.0
-offset_bottom = 23.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -60.0
+offset_top = -34.0
+offset_right = 60.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 text = "这是提示框"
 label_settings = SubResource("LabelSettings_jelmi")
 script = ExtResource("1_aougp")

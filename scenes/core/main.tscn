@@ -1,13 +1,22 @@
-[gd_scene load_steps=12 format=3 uid="uid://kr6jpiqs7y7d"]
+[gd_scene load_steps=21 format=3 uid="uid://kr6jpiqs7y7d"]
 
 [ext_resource type="PackedScene" uid="uid://yysuwlenskbj" path="res://scenes/ui/slot.tscn" id="1_fgbdc"]
 [ext_resource type="Script" uid="uid://cwf58dc7qynju" path="res://scenes/core/slot_grid_container.gd" id="1_i4cec"]
+[ext_resource type="AudioStream" uid="uid://dbgvyvmw53is" path="res://assets/audios/A4.wav" id="2_n74up"]
 [ext_resource type="Script" uid="uid://digb5oscbr5v6" path="res://scenes/core/main_button_group.gd" id="3_2dmjg"]
+[ext_resource type="AudioStream" uid="uid://bagvr2sbd1qld" path="res://assets/audios/B4.wav" id="3_lwqq7"]
 [ext_resource type="PackedScene" uid="uid://b6b3rska3xjo1" path="res://scenes/ui/icon_button.tscn" id="4_ebys2"]
+[ext_resource type="AudioStream" uid="uid://dhg6aw5mcssfa" path="res://assets/audios/C4.wav" id="4_m8j4h"]
 [ext_resource type="Texture2D" uid="uid://dnsjcohsgakmg" path="res://assets/icon/cross.svg" id="5_jvmw0"]
+[ext_resource type="AudioStream" uid="uid://cghk8tq14s6dx" path="res://assets/audios/C5.wav" id="5_ralht"]
+[ext_resource type="AudioStream" uid="uid://pvr5r4ivlfdo" path="res://assets/audios/D4.wav" id="6_mgwo4"]
 [ext_resource type="Texture2D" uid="uid://dlsa1tn3m1cgg" path="res://assets/icon/redo2.svg" id="6_phv0v"]
+[ext_resource type="AudioStream" uid="uid://bhh3r4ij8138y" path="res://assets/audios/E4.wav" id="7_5r554"]
 [ext_resource type="Texture2D" uid="uid://dl2bw72xnwju8" path="res://assets/icon/undo2.svg" id="7_jpx65"]
 [ext_resource type="Texture2D" uid="uid://bcl3j5s10mr6s" path="res://assets/icon/volume-medium.svg" id="8_fu2j5"]
+[ext_resource type="AudioStream" uid="uid://b03six4v40ttr" path="res://assets/audios/F4.wav" id="8_uyqaj"]
+[ext_resource type="AudioStream" uid="uid://byf784dxpvko7" path="res://assets/audios/G4.wav" id="9_wy8uk"]
+[ext_resource type="AudioStream" uid="uid://cdnttvy28bwdd" path="res://assets/audios/2048_piano_bgm.wav" id="10_lwqq7"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6rktp"]
 bg_color = Color(0.6649832, 0.59014493, 0.45056063, 1)
@@ -87,7 +96,8 @@ theme_override_constants/h_separation = 32
 theme_override_constants/v_separation = 32
 columns = 4
 script = ExtResource("1_i4cec")
-sfxs = Array[AudioStreamWAV]([null])
+sfxs = Array[AudioStreamWAV]([ExtResource("2_n74up"), ExtResource("3_lwqq7"), ExtResource("4_m8j4h"), ExtResource("5_ralht"), ExtResource("6_mgwo4"), ExtResource("7_5r554"), ExtResource("8_uyqaj"), ExtResource("9_wy8uk")])
+bgms = Array[AudioStreamWAV]([ExtResource("10_lwqq7")])
 
 [node name="Slot" parent="UI/PanelContainer/MarginContainer/VBoxContainer/PanelContainer/MarginContainer/SlotGridContainer" instance=ExtResource("1_fgbdc")]
 layout_mode = 2

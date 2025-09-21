@@ -1,6 +1,6 @@
 class_name SlotGridContianer extends GridContainer
-const GAME_OVER = preload("uid://py2q3ef087vw")
-const POP_LABEL = preload("uid://cmkej24xwsni1")
+const GAME_OVER = preload("res://scenes/ui/game_over.tscn")
+const POP_LABEL = preload("res://scenes/ui/pop_label.tscn")
 # TODO 网络格子容器 ===================>值 号<========================>
 #region 信号
 
@@ -61,6 +61,7 @@ func sfx_play() -> void:
 	audio_player.stream = sfxs[randi() % sfxs.size()]
 	audio_player.finished.connect(func(): audio_player.queue_free())
 	sfx.add_child(audio_player)
+	audio_player.play()
 # Func 插件PopLabel
 func create_pop_label(popStr : String) -> void:
 	var popLabel : PopLabel = POP_LABEL.instantiate()
@@ -85,6 +86,7 @@ func move_rows(reverse_flag : bool = false) -> void:
 	if not can_move(rows, reverse_flag) : 
 		create_pop_label("当前方向无法移动")
 		return
+	sfx_play()
 	save_last_slots()
 	move(rows, reverse_flag)
 	merge_slots(rows, reverse_flag)
@@ -98,6 +100,7 @@ func move_cols(reverse_flag : bool = false) -> void:
 	if not can_move(cols, reverse_flag) : 
 		create_pop_label("当前方向无法移动")
 		return
+	sfx_play()
 	save_last_slots()
 	move(cols, reverse_flag)
 	merge_slots(cols, reverse_flag)
